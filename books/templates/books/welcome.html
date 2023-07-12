@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <h1>Welcome to our library mr {{ name }}</h1>
+    <p>Dominic and Favour White</p>
+    {% for student in students %}
+        <li>{{ student.values }}</li>
+    {% endfor %}
+</body>
+</html>
