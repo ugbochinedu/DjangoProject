@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .models import Author
 
 users = [
     {"name": "sheriff"},
@@ -10,7 +11,8 @@ users = [
 
 # Create your views here.
 def welcome(request):
-    return render(request, 'books/welcome.html', {"students": list(users)})
+    query_set = Author.objects.get(id=1)
+    return render(request, 'books/welcome.html', {"authors": list(query_set)})
 
 
 def hello(request):

@@ -10,8 +10,8 @@
 <body>
     <h1>Welcome to our library mr {{ name }}</h1>
     <p>Dominic and Favour White</p>
-    {% for student in students %}
-        <li>{{ student.values }}</li>
+    {% for author in authors %}
+        <li>{{ author.first_name }} {{ author.last_name }}</li>
     {% endfor %}
 </body>
 </html>

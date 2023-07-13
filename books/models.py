@@ -43,7 +43,7 @@ class Address(models.Model):
     street_name = models.CharField(max_length=400)
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=150)
-    # country = models.CharField(max_length=200)
+    country = models.CharField(max_length=200, default="Nigeria")
 
 
 class BookInstance(models.Model):
