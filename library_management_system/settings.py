@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     'books',
     'playground',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
