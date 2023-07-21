@@ -19,6 +19,9 @@ class Author(models.Model):
     last_name = models.CharField(max_length=150)
     email = models.EmailField(unique=True)
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Book(models.Model):
     GENRE_CHOICES = [
@@ -37,6 +40,10 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title} {self.isbn}"
+
+    class Meta:
+        # - infront make the list reversed
+        ordering = ['title']
 
 
 class Address(models.Model):
