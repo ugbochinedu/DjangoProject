@@ -35,6 +35,9 @@ class Book(models.Model):
     date_published = models.DateField(blank=True, null=True)
     copies = models.IntegerField()
 
+    def __str__(self):
+        return f"{self.title} {self.isbn}"
+
 
 class Address(models.Model):
     # street_nos = models.IntegerField()

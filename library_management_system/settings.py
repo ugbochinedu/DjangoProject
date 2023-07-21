@@ -72,6 +72,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'library_management_system.wsgi.application'
 
 AUTH_USER_MODEL = 'books.User'
+# AUTH_USER_MODEL = 'playground.User'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
