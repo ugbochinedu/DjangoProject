@@ -62,3 +62,14 @@ class BookInstance(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     date_borrow = models.DateField(auto_now_add=True)
     date_return = models.DateField(auto_now_add=True)
+
+
+class ReviewModel(models.Model):
+    reviewer_name = models.CharField(max_length=200)
+    date_and_time = models.DateTimeField(auto_now_add=True)
+    book = models.ManyToOneRel(Book, on_delete=models.PROTECT)
+    DESCRIPTION_CHOICES = [
+        ('INTERESTING', 'Interesting'),
+        ('SWEET', 'Sweet'),
+        ('BORING', 'Boring'),
+    ]

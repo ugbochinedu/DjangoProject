@@ -9,3 +9,5 @@ def welcome(request):
 
 def hello(request):
     return HttpResponse("Welcome to our playground")
+
+
