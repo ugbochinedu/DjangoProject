@@ -15,10 +15,10 @@ class BooKSerializer(serializers.ModelSerializer):
 
     # name_of_book =serializers.CharField(source='title')
 
-    # author = serializers.HyperlinkedRelatedField(
-    #     queryset=Author.objects.all(),
-    #     view_name="author-detail"
-    # )
+    author = serializers.HyperlinkedRelatedField(
+        queryset=Author.objects.all(),
+        view_name="author-detail"
+    )
 
 
 class CreateAuthorSerializer(serializers.ModelSerializer):

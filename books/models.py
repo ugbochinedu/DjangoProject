@@ -65,11 +65,12 @@ class BookInstance(models.Model):
 
 
 class ReviewModel(models.Model):
-    reviewer_name = models.CharField(max_length=200)
-    date_and_time = models.DateTimeField(auto_now_add=True)
-    book = models.ManyToOneRel(Book, on_delete=models.PROTECT)
     DESCRIPTION_CHOICES = [
         ('INTERESTING', 'Interesting'),
         ('SWEET', 'Sweet'),
         ('BORING', 'Boring'),
     ]
+    reviewer_name = models.CharField(max_length=200)
+    date_and_time = models.DateTimeField(auto_now_add=True)
+    book = models.ManyToOneRel(Book, on_delete=models.CASCADE, to='Book', field_name='book')
+    description = models.CharField(max_length=15, choices=DESCRIPTION_CHOICES, default="Interesting")
