@@ -6,8 +6,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Author, Book
-from .serializers import AuthorSerializer, CreateBooKSerializer, BooKSerializer, CreateAuthorSerializer
+from .models import Author, Book, ReviewModel, BookInstance
+from .serializers import AuthorSerializer, CreateBooKSerializer, BooKSerializer, CreateAuthorSerializer, \
+    ReviewSerializer, BookInstanceSerializer
 
 users = [
     {"name": "sheriff"},
@@ -20,6 +21,8 @@ class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BooKSerializer
 
+    # def destory(self, request, *args, **kwargs):
+
     def get_serializer_context(self):
         return {'request': self.request}
 
@@ -28,6 +31,21 @@ class AuthorViewSet(ModelViewSet):
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
+
+class ReviewViewSet(ModelViewSet):
+    queryset = ReviewModel.objects.all()
+    serializer_class = ReviewSerializer
+
+    def get_serializer_context(self):
+        return ReviewModel.objects.filter(book_id=self.kwargs['book_pk'])
+
+
+class BookInstanceViewSet(ModelViewSet):
+    queryset = BookInstance.objects.all()
+    serializer_class = BookInstanceSerializer
+
+    def get_serializer_context(self):
+        return BookInstance.objects.filter(book_id=self.kwargs['book_pk'])
 
 # class BookList(ListCreateAPIView):
 # queryset = Book.objects.all()
