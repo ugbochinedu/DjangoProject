@@ -47,9 +47,10 @@ class ReviewSerializer(serializers.ModelSerializer):
 class BookInstanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookInstance
-        fields = ['book', 'user', 'price', 'date_borrow', 'date_return']
-
-    # def borrowBook(self):
+        fields = ['book', 'user', 'price', 'date_return']
+    #
+    # def borrowBook(self, validated_data):
+    #     return ReviewModel.objects.create(book_id=self.context['book_id'], **validated_data)
 
 # class BookSerializer (serializers.Serializer):
 #     title = serializers.CharField(max_length=200)

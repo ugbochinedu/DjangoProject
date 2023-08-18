@@ -2,11 +2,15 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
-
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+from .filters import CustomFilter
 from .models import Author, Book, ReviewModel, BookInstance
+from .pagination import CustomPagination
 from .serializers import AuthorSerializer, CreateBooKSerializer, BooKSerializer, CreateAuthorSerializer, \
     ReviewSerializer, BookInstanceSerializer
 
@@ -20,6 +24,17 @@ users = [
 class BookViewSet(ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BooKSerializer
+    pagination_class = CustomPagination
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = CustomFilter
+    search_fields =['genre','isbn']
+    ordering_fields = ['title']
+    # def get_queryset(self):
+    #     queryset = Book.objects.all()
+    #     author_id = self.request.query_params.get('author_id')
+    #     if author_id is not None:
+    #         queryset = queryset.filter(author_id=author_id)
+    #     return queryset
 
     # def destory(self, request, *args, **kwargs):
 
@@ -40,12 +55,12 @@ class ReviewViewSet(ModelViewSet):
         return ReviewModel.objects.filter(book_id=self.kwargs['book_pk'])
 
 
-class BookInstanceViewSet(ModelViewSet):
+class BookInstanceAPIView(ListCreateAPIView):
     queryset = BookInstance.objects.all()
     serializer_class = BookInstanceSerializer
 
-    def get_serializer_context(self):
-        return BookInstance.objects.filter(book_id=self.kwargs['book_pk'])
+    # def get_serializer_context(self):
+    #     return {'request': self.request}
 
 # class BookList(ListCreateAPIView):
 # queryset = Book.objects.all()

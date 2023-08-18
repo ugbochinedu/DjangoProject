@@ -31,10 +31,9 @@ class Book(models.Model):
         ('ROMANCE', 'Romance')
     ]
     title = models.CharField(max_length=1000)
-    isbn = models.CharField(max_length=13)
-    genre = models.CharField(max_length=8, choices=GENRE_CHOICES, default="Finance")
-    author = models.ForeignKey(Author,
-                               on_delete=models.CASCADE)  # when models = set_null, set another arg with null = True. it can also be PROTECTED
+    isbn = models.CharField(max_length=20)
+    genre = models.CharField(max_length=50, choices=GENRE_CHOICES, default="Finance")
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)  # when models = set_null, set another arg with null = True. it can also be PROTECTED
     date_published = models.DateField(blank=True, null=True)
     copies = models.IntegerField()
 
@@ -61,7 +60,7 @@ class BookInstance(models.Model):
     user = models.OneToOneField(User, on_delete=models.PROTECT)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     date_borrow = models.DateField(auto_now_add=True)
-    date_return = models.DateField(auto_now_add=True)
+    date_return = models.DateField()
 
 
 class ReviewModel(models.Model):

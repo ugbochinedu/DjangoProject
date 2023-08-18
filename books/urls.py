@@ -5,16 +5,21 @@ from . import views
 
 
 router = routers.DefaultRouter()
-router.register('books', views.BookViewSet)
+router.register('books', views.BookViewSet, basename='books')
 router.register('authors', views.AuthorViewSet)
 router.register('reviews', views.ReviewViewSet)
-router.register('bookInstance', views.BookInstanceViewSet)
 # print(router.urls)
 
 books_router = routers.NestedDefaultRouter(router, 'books', lookup='book')
 books_router.register('reviews', views.ReviewViewSet, basename='book-review')
 
-urlpatterns = router.urls + books_router.urls
+# urlpatterns = router.urls + books_router.urls
+
+urlpatterns =[
+    path('', include(router.urls)),
+    path('', include(books_router.urls)),
+    path('bookinstance/', views.BookInstanceAPIView.as_view()),
+]
 
 # urlpatterns = [
     # path('book/', views.book_list),
